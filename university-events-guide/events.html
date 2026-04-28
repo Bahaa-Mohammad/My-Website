@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفعاليات</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    body {
+      font-family: Tahoma;
+      background-color: #f8f9fa;
+    }
+
+    .hero {
+      background: linear-gradient(to right, #5f67ff, #7bfefe);
+      color: white;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+<!--header-->
+<header class="custom-header">
+  <div class="header-content">
+
+    <!-- اللوقو + النص -->
+    <div class="logo-box">
+      <img src="assets/img/logo.png" alt="logo" class="logo-img">
+      <span class="logo-text">الدليل</span>
+    </div>
+
+    <!-- الروابط -->
+    <nav class="nav-container">
+      <a href="index.html">الرئيسية</a>
+      <a href="events.html">الفعاليات</a>
+      <a href="about.html">عن الدليل</a>
+      <a href="contact.html">اتصل بنا</a>
+    </nav>
+
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>الفعاليات</h1>
+  <p>اكتشف جميع الفعاليات المتاحة</p>
+</div>
+
+<div class="container my-5">
+
+  <!-- فلترة -->
+  <div class="row mb-4">
+
+    <div class="col-md-4 mb-2">
+      <input type="text" id="searchInput" class="form-control" placeholder="بحث عن فعالية...">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <select id="categoryFilter" class="form-control">
+        <option value="">كل التصنيفات</option>
+        <option value="تقنية">تقنية</option>
+        <option value="ثقافية">ثقافية</option>
+        <option value="رياضية">رياضية</option>
+      </select>
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <select id="locationFilter" class="form-control">
+        <option value="">كل المواقع</option>
+        <option value="الرياض">دمشق</option>
+        <option value="جدة">طرطوس</option>
+        <option value="عن بعد">عن بعد</option>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- الفعاليات -->
+  <div class="row" id="eventsContainer">
+
+    <!-- Card -->
+    <div class="col-md-4 mb-4 event-card" data-category="تقنية" data-location="الرياض">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x200">
+        <div class="card-body">
+          <h5 class="card-title">ورشة برمجة</h5>
+          <p>📅 2026-05-01</p>
+          <p>📍 دمشق </p>
+          <p>تصنيف: تقنية</p>
+          <p>تعلم أساسيات البرمجة</p>
+          <a href="event.html" class="btn btn-primary">التفاصيل</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4 event-card" data-category="ثقافية" data-location="جدة">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x200">
+        <div class="card-body">
+          <h5 class="card-title">معرض كتاب</h5>
+          <p>📅 2026-05-10</p>
+          <p>📍 طرطوس </p>
+          <p>تصنيف: ثقافية</p>
+          <p>أكبر معرض للكتب</p>
+          <a href="event.html" class="btn btn-primary">التفاصيل</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4 event-card" data-category="رياضية" data-location="عن بعد">
+      <div class="card">
+        <img src="https://via.placeholder.com/400x200">
+        <div class="card-body">
+          <h5 class="card-title">بطولة إلكترونية</h5>
+          <p>📅 2026-05-15</p>
+          <p>📍 عن بعد</p>
+          <p>تصنيف: رياضية</p>
+          <p>منافسات ألعاب إلكترونية</p>
+          <a href="event.html" class="btn btn-primary">التفاصيل</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center p-3">
+  جميع الحقوق محفوظة © 2026
+</footer>
+
+<!-- JS -->
+<script>
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const locationFilter = document.getElementById("locationFilter");
+
+searchInput.addEventListener("input", filterEvents);
+categoryFilter.addEventListener("change", filterEvents);
+locationFilter.addEventListener("change", filterEvents);
+
+function filterEvents() {
+  const searchValue = searchInput.value.toLowerCase();
+  const categoryValue = categoryFilter.value;
+  const locationValue = locationFilter.value;
+
+  const events = document.querySelectorAll(".event-card");
+
+  events.forEach(event => {
+    const title = event.querySelector(".card-title").textContent.toLowerCase();
+    const category = event.dataset.category;
+    const location = event.dataset.location;
+
+    let show = true;
+
+    if (searchValue && !title.includes(searchValue)) {
+      show = false;
+    }
+
+    if (categoryValue && category !== categoryValue) {
+      show = false;
+    }
+
+    if (locationValue && location !== locationValue) {
+      show = false;
+    }
+
+    event.style.display = show ? "block" : "none";
+  });
+}
+</script>
+
+</body>
+</html>

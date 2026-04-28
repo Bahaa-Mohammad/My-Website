@@ -1,0 +1,52 @@
+body {
+  font-family: Arial;
+}
+
+/* HEADER */
+.custom-header {
+  background-color: #0a1f44;
+  padding: 20px 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-container a {
+  color: white;
+      font-family: Tahoma;
+      text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* TITLE */
+.title-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.arabic-title {
+  color: #0a1f44;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.english-title {
+  color: #d4af37;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* CARDS */
+.card:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+/* اللوغو */
+.logo-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
